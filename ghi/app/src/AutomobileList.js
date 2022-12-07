@@ -15,12 +15,12 @@ function AutomobileList(props) {
               </tr>
             </thead>
             <tbody>
-              {props.automobiles.map(automobile => {
+              {props.autos.map(auto => {
                 return (
-                  <tr key={automobile.id}>
-                    <td>{automobile.color}</td>
-                    <td>{automobile.year}</td>
-                    <td>{automobile.vin}</td>
+                  <tr key={auto.id}>
+                    <td>{auto.color}</td>
+                    <td>{auto.year}</td>
+                    <td>{auto.vin}</td>
                   </tr>
                 );
               })}

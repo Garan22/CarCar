@@ -10,35 +10,25 @@ root.render(
 );
 
 
-async function loadmanufacturer() {
-  const response = await fetch("http://localhost:8100/api/manufacturers/")
-  if (response.ok) {
-    const data = await response.json();
-    console.log(data)
-    root.render(
-      <React.StrictMode>
-        <App manufacturers={data.manufacturers} />
-      </React.StrictMode>
-    )
-  } else {
-    console.error(response)
-  }
-}
-
-loadmanufacturer();
-
-async function loadautomobiles() {
+async function loaddata() {
+  const manufacturerResponse = await fetch("http://localhost:8100/api/manufacturers/")
   const automobileResponse = await fetch("http://localhost:8100/api/automobiles/")
-  if(automobileResponse.ok) {
+  const modelResponse = await fetch("http://localhost:8100/api/models/")
+  if (manufacturerResponse.ok && automobileResponse.ok && modelResponse.ok) {
+    const manufacturerData = await manufacturerResponse.json();
     const automobileData = await automobileResponse.json();
-    console.log(automobileData)
+    const modelData = await modelResponse.json();
+    console.log(manufacturerData);
+    console.log(automobileData);
+    console.log(modelData)
     root.render(
       <React.StrictMode>
-        <App automobiles={automobileData.automobiles} />
+        <App manufacturers={manufacturerData.manufacturers} autos={automobileData.autos} models={modelData.models}/>
       </React.StrictMode>
-
     )
   } else {
-    console.error(automobileResponse)
+    console.error(manufacturerResponse)
   }
 }
+
+loaddata();

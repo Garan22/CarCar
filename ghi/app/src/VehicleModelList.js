@@ -3,18 +3,18 @@ import { Link } from 'react-router-dom'
 
 function VehicleModelList(props) {
 
-  const deleteVehicleModel = async (model) => {
+  // const deleteVehicleModel = async (model) => {
 
-    const deleteURL = `http://localhost:8080/api/models/${model.id}`
-    const fetchConfig = {
-      method: "DELETE"
-    }
+  //   const deleteURL = `http://localhost:8080/api/models/${model.id}`
+  //   const fetchConfig = {
+  //     method: "DELETE"
+  //   }
 
-    const response = await fetch(deleteURL, fetchConfig);
-    if (response.ok) {
-    }
+  //   const response = await fetch(deleteURL, fetchConfig);
+  //   if (response.ok) {
+  //   }
 
-  }
+  // }
 
   return (
     <>
@@ -27,7 +27,7 @@ function VehicleModelList(props) {
             <th>Manufacturer</th>
             <th>Name</th>
             <th>Image Url</th>
-            <th>Delete this Vehicle Model</th>
+            {/* <th>Delete this Vehicle Model</th> */}
           </tr>
         </thead>
         <tbody>
@@ -36,10 +36,10 @@ function VehicleModelList(props) {
               <tr key={model.id}>
                 <td>{model.manufacturer.name}</td>
                 <td>{ model.name }</td>
-                <td><img src={model.image_url} alt="pics of model" width="100px" /></td>
-                <td>
+                <td><img src={model.picture_url} alt="pics of model" width="100px" /></td>
+                {/* <td>
                   <button className="btn btn-danger" onClick={()=> deleteVehicleModel(model)} value={model.id}>Delete</button>
-                </td>
+                </td> */}
               </tr>
             );
           })}
@@ -53,3 +53,4 @@ function VehicleModelList(props) {
   }
 
   export default VehicleModelList
+
