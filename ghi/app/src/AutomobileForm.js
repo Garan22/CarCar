@@ -98,9 +98,12 @@ const AutomobileForm = () => {
                                 })}
                             </select>
                         </div>
-
                         <button className="btn btn-primary">Create</button>
                     </form>
+                    <br></br>
+                    <a href="/manufacturers/">
+                        <button className="btn btn-outline-danger">Back to ManufacturerList list</button>
+                    </a>
                 </div>
             </div>
         </div>
