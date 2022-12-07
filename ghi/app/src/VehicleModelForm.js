@@ -17,7 +17,7 @@ class VehicleModelForm extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this)
     }
     async componentDidMount(){
-        const url = 'http://localhost:8100/api/manufacturer/'
+        const url = 'http://localhost:8100/api/manufacturers/'
 
         const response = await fetch(url)
 
@@ -91,10 +91,16 @@ class VehicleModelForm extends React.Component {
                     <label htmlFor="picture url">picture Url (optional)</label>
                   </div>
 
-                  <div className="form-floating mb-3">
-                    <input onChange={this.handleManufacturerChange} value={this.state.manufacturer} placeholder="manufacturer" required type="text" name="manufacturer" id="manufacturer" className="form-control" />
-                    <label htmlFor="manufacturer">Manufacturer</label>
-                  </div>
+                  <div className="mb-3">
+                    <select value={this.state.manufacturer} onChange={this.handleManufacturerChange} required name="manufacturer" id="manufacturer" className="form-select">
+                    <option value="">Choose a manufacturer</option>
+                    {this.state.manufacturers.map(manufacturer => {
+                        return (
+                        <option key={manufacturer.href} value={manufacturer.href}>{manufacturer.name}</option>
+                    );
+                  })}
+                    </select>
+                    </div>
 
                   <button className="btn btn-primary">Create</button>
                 </form>
