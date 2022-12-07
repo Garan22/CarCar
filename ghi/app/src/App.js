@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import AutomobileForm from './AutomobileForm';
 import AutomobileList from './AutomobileList';
 import MainPage from './MainPage';
 import ManufacturerForm from './ManufacturerForm';
@@ -22,6 +23,7 @@ function App(props) {
           <Route path="/models" element={<VehicleModelList models={props.models}/>}></Route>
           <Route path= "/models/new" element={<VehicleModelForm/>}></Route>
           <Route path= "/automobiles" element={<AutomobileList autos={props.autos}/>}></Route>
+          <Route path= "/automobiles/new" element={<AutomobileForm/>}></Route>
         </Routes>
       </div>
     </BrowserRouter>
