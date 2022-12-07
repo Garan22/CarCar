@@ -18,14 +18,14 @@ class AutomobileForm extends React.Component {
     this.handleChangeModel = this.handleChangeModel.bind(this);
   }
 
+
   async componentDidMount() {
-    const url = "http://localhost:8100/api/models/";
+    const url = `http://localhost:8100/api/models`;
 
     const response = await fetch(url);
 
     if (response.ok) {
       const data = await response.json();
-      console.log(data)
       this.setState({ models: data.models });
     }
   }
@@ -33,7 +33,7 @@ class AutomobileForm extends React.Component {
   async handleSubmit(event) {
     event.preventDefault();
     const data = {...this.state};
-    delete data.models;
+
 
     const autoUrl = 'http://localhost:8100/api/automobiles/';
     const fetchConfig = {
@@ -84,6 +84,9 @@ class AutomobileForm extends React.Component {
 
   render() {
     return (
+        <>
+
+
       <div className="row">
         <div className="offset-3 col-6">
           <div className="shadow p-4 mt-4">
@@ -114,12 +117,13 @@ class AutomobileForm extends React.Component {
               <button className="btn btn-primary">Create</button>
             </form>
             <br></br>
-            <a href="/hats/">
-                <button className="btn btn-outline-danger">Back to Hat list</button>
+            <a href="/automobiles">
+                <button className="btn btn-outline-danger">Back to Automobile list</button>
             </a>
           </div>
         </div>
       </div>
+      </>
     );
   }
 }
