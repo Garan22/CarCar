@@ -1,7 +1,17 @@
-import React from 'react'
+import React, { useEffect, useState }  from 'react'
 import { Link } from 'react-router-dom'
 
-function VehicleModelList(props) {
+function VehicleModelList() {
+  const [models, setModels] = useState([]);
+
+  useEffect(() => {
+          fetch('http://localhost:8100/api/models/')
+              .then(response => response.json())
+              .then(data => {
+                  setModels(data.models);
+              })
+              .catch(e => console.log('error: ', e));
+      }, [])
 
   // const deleteVehicleModel = async (model) => {
 
@@ -31,7 +41,7 @@ function VehicleModelList(props) {
           </tr>
         </thead>
         <tbody>
-          {props.models.map(model => {
+          {models.map(model => {
             return (
               <tr key={model.id}>
                 <td>{model.manufacturer.name}</td>
@@ -53,4 +63,3 @@ function VehicleModelList(props) {
   }
 
   export default VehicleModelList
-
