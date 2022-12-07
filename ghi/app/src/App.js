@@ -9,7 +9,7 @@ import VehicleModelForm from './VehicleModelForm';
 import VehicleModelList from './VehicleModelList';
 
 function App(props) {
-  if (props.manufacturers === undefined && props.autos === undefined && props.models === undefined) {
+  if (props.autos === undefined && props.models === undefined) {
     return null;
   }
   return (
