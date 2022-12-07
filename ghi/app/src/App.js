@@ -8,10 +8,8 @@ import Nav from './Nav';
 import VehicleModelForm from './VehicleModelForm';
 import VehicleModelList from './VehicleModelList';
 
-function App(props) {
-  if (props.models === undefined) {
-    return null;
-  }
+function App() {
+
   return (
     <BrowserRouter>
       <Nav />
@@ -20,7 +18,7 @@ function App(props) {
           <Route path="/" element={<MainPage />} />
           <Route path="/manufacturers" element={<ManufacturerList />}></Route>
           <Route path="/manufacturers/new" element={<ManufacturerForm />}></Route>
-          <Route path="/models" element={<VehicleModelList models={props.models}/>}></Route>
+          <Route path="/models" element={<VehicleModelList/>} ></Route>
           <Route path= "/models/new" element={<VehicleModelForm/>}></Route>
           <Route path= "/automobiles" element={<AutomobileList/>}></Route>
           <Route path= "/automobiles/new" element={<AutomobileForm/>}></Route>

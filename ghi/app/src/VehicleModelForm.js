@@ -82,7 +82,7 @@ class VehicleModelForm extends React.Component {
                 <form onSubmit={this.handleSubmit} id="create-Vehicle-Model-form">
 
                   <div className="form-floating mb-3">
-                    <input value={this.state.model_name} onChange={this.handleNameChange} placeholder="Name" required type="text" name="Name" id="Name" className="form-control" />
+                    <input value={this.state.name} onChange={this.handleNameChange} placeholder="Name" required type="text" name="Name" id="Name" className="form-control" />
                     <label htmlFor="Name">Name</label>
                   </div>
 
@@ -96,7 +96,7 @@ class VehicleModelForm extends React.Component {
                     <option value="">Choose a manufacturer</option>
                     {this.state.manufacturers.map(manufacturer => {
                         return (
-                        <option key={manufacturer.href} value={manufacturer.href}>{manufacturer.name}</option>
+                        <option key={manufacturer.href} value={manufacturer.href }>{manufacturer.name}</option>
                     );
                   })}
                     </select>
