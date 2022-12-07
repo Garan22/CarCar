@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
+import VehicleModelForm from './VehicleModelForm';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -11,20 +12,17 @@ root.render(
 
 
 async function loaddata() {
-  const automobileResponse = await fetch("http://localhost:8100/api/automobiles/")
   const modelResponse = await fetch("http://localhost:8100/api/models/")
-  if ( automobileResponse.ok && modelResponse.ok) {
-    const automobileData = await automobileResponse.json();
+  if  (modelResponse.ok) {
     const modelData = await modelResponse.json();
-    console.log(automobileData);
     console.log(modelData)
     root.render(
       <React.StrictMode>
-        <App autos={automobileData.autos} models={modelData.models}/>
+        <App models={modelData.models}/>
       </React.StrictMode>
     )
   } else {
-    console.error(automobileResponse)
+    console.error(modelResponse)
   }
 }
 

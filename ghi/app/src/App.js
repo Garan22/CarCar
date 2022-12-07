@@ -9,7 +9,7 @@ import VehicleModelForm from './VehicleModelForm';
 import VehicleModelList from './VehicleModelList';
 
 function App(props) {
-  if (props.autos === undefined && props.models === undefined) {
+  if (props.models === undefined) {
     return null;
   }
   return (
@@ -18,11 +18,11 @@ function App(props) {
       <div className="container">
         <Routes>
           <Route path="/" element={<MainPage />} />
-          <Route path="/manufacturers" element={<ManufacturerList manufacturers={props.manufacturers}/>}></Route>
+          <Route path="/manufacturers" element={<ManufacturerList />}></Route>
           <Route path="/manufacturers/new" element={<ManufacturerForm />}></Route>
           <Route path="/models" element={<VehicleModelList models={props.models}/>}></Route>
           <Route path= "/models/new" element={<VehicleModelForm/>}></Route>
-          <Route path= "/automobiles" element={<AutomobileList autos={props.autos}/>}></Route>
+          <Route path= "/automobiles" element={<AutomobileList/>}></Route>
           <Route path= "/automobiles/new" element={<AutomobileForm/>}></Route>
         </Routes>
       </div>

@@ -1,7 +1,21 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
+import {useEffect, useState} from "react"
 
-function AutomobileList(props) {
+function AutomobileList() {
+    const [autos, setAutos] = useState([]);
+
+    useEffect(() => {
+            fetch('http://localhost:8100/api/automobiles/')
+                .then(response => response.json())
+                .then(data => {
+                    setAutos(data.autos);
+                })
+                .catch(e => console.log('error: ', e));
+        }, [])
+
+
+
 
     return (
         <>
@@ -20,7 +34,7 @@ function AutomobileList(props) {
               </tr>
             </thead>
             <tbody>
-              {props.autos.map(auto => {
+              {autos.map(auto => {
                 return (
                   <tr key={auto.id}>
                     <td>{auto.color}</td>
