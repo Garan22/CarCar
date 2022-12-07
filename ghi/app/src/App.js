@@ -17,7 +17,7 @@ function App(props) {
           <Route path="/" element={<MainPage />} />
           <Route path="/manufacturers" element={<ManufacturerList manufacturers={props.manufacturers}/>}></Route>
           <Route path="/manufacturers/new" element={<ManufacturerForm />}></Route>
-          <Route path= "/models/" element={<VehicleModelForm/>}></Route>
+          <Route path= "/models/new" element={<VehicleModelForm/>}></Route>
         </Routes>
       </div>
     </BrowserRouter>
