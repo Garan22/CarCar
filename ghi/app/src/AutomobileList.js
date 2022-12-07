@@ -26,9 +26,9 @@ function AutomobileList() {
         <table className="table table-bordered">
             <thead>
               <tr>
-                <th>Color</th>
-                <th>Year</th>
                 <th>Vin</th>
+                <th>Year</th>
+                <th>Color</th>
                 <th>Model</th>
                 <th>Manufacturer</th>
               </tr>
@@ -37,9 +37,9 @@ function AutomobileList() {
               {autos.map(auto => {
                 return (
                   <tr key={auto.id}>
-                    <td>{auto.color}</td>
-                    <td>{auto.year}</td>
                     <td>{auto.vin}</td>
+                    <td>{auto.year}</td>
+                    <td>{auto.color}</td>
                     <td>{auto.model.name}</td>
                     <td>{auto.model.manufacturer.name}</td>
                   </tr>
