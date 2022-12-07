@@ -12,7 +12,6 @@ function VehicleModelList(props) {
 
     const response = await fetch(deleteURL, fetchConfig);
     if (response.ok) {
-      window.location.reload()
     }
 
   }

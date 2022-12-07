@@ -23,14 +23,14 @@ class VehicleModelForm extends React.Component {
 
         if(response.ok) {
             const data = await response.json()
-            this.setState({ manufacturer: data.manufacturer })
+            this.setState({ manufacturers: data.manufacturers })
         }
     }
 
     async handleSubmit(event) {
         event.preventDefault()
         const data = {...this.state}
-        delete data.manufacturer
+        delete data.manufacturers
 
         const modelUrl = 'http://localhost:8100/api/models/'
         const fetchConfig = {
