@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import AutomobileList from './AutomobileList';
 import MainPage from './MainPage';
 import ManufacturerForm from './ManufacturerForm';
 import ManufacturerList from './ManufacturerList';
@@ -6,7 +7,7 @@ import Nav from './Nav';
 import VehicleModelForm from './VehicleModelForm';
 
 function App(props) {
-  if (props.manufacturers === undefined) {
+  if (props.manufacturers === undefined && props.automobiles == undefined) {
     return null;
   }
   return (
@@ -18,6 +19,7 @@ function App(props) {
           <Route path="/manufacturers" element={<ManufacturerList manufacturers={props.manufacturers}/>}></Route>
           <Route path="/manufacturers/new" element={<ManufacturerForm />}></Route>
           <Route path= "/models/new" element={<VehicleModelForm/>}></Route>
+          <Route path= "/automobiles" element={<AutomobileList automobiles={props.automobiles}/>}></Route>
         </Routes>
       </div>
     </BrowserRouter>

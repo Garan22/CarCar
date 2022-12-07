@@ -26,3 +26,19 @@ async function loadmanufacturer() {
 }
 
 loadmanufacturer();
+
+async function loadautomobiles() {
+  const automobileResponse = await fetch("http://localhost:8100/api/automobiles/")
+  if(automobileResponse.ok) {
+    const automobileData = await automobileResponse.json();
+    console.log(automobileData)
+    root.render(
+      <React.StrictMode>
+        <App automobiles={automobileData.automobiles} />
+      </React.StrictMode>
+
+    )
+  } else {
+    console.error(automobileResponse)
+  }
+}
