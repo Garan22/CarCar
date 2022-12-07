@@ -20,7 +20,7 @@ class AutomobileForm extends React.Component {
 
 
   async componentDidMount() {
-    const url = `http://localhost:8100/api/models`;
+    const url = `http://localhost:8100/api/models/`;
 
     const response = await fetch(url);
 
