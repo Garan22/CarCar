@@ -9,6 +9,9 @@ class AutomobileVO(models.Model):
     year=models.PositiveSmallIntegerField()
     vin = models.CharField(max_length=17, unique=True)
 
+    def __str__(self):
+        return self.vin
+
 
 
 class Salesperson(models.Model):
