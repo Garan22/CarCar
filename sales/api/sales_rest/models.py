@@ -23,8 +23,7 @@ class Salesperson(models.Model):
     def __str__(self):
         return self.name
 
-    def __str__(self):
-        return self.employee_id
+
 
 
 class Customer(models.Model):
@@ -36,25 +35,25 @@ class Customer(models.Model):
         return self.name
 
 
-class Salesrecord(models.Model):
+class SalesRecord(models.Model):
 
     price = models.DecimalField(max_digits=12, decimal_places=2)
 
     automobile= models.ForeignKey(
         AutomobileVO,
-        related_name ="salesrecords",
+        related_name ="SalesRecords",
         on_delete=models.CASCADE,
     )
 
     salesperson=models.ForeignKey(
         Salesperson,
-        related_name="salesrecords",
+        related_name="SalesRecords",
         on_delete=models.CASCADE,
     )
 
     customer=models.ForeignKey(
         Customer,
-        related_name="salesrecords",
+        related_name="SalesRecords",
         on_delete=models.CASCADE,
 
     )
