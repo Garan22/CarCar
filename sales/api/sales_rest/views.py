@@ -25,6 +25,56 @@ def api_list_salespersons(request):
             safe=False
         )
 
+
+@require_http_methods(["GET", "PUT", "DELETE"])
+def api_show_salesperson(request, pk):
+    if request.method == "GET":
+        try:
+            salesperson = Salesperson.objects.get(id=pk)
+            return JsonResponse(
+                salesperson,
+                encoder =SalespersonEncoder,
+                safe=False,
+            )
+        except Salesperson.DoesNotExist:
+            response = JsonResponse({"message": "Employee does not exist"})
+            response.status_code = 404
+            return response
+
+    elif request.method == "DELETE":
+        try:
+            salesperson = Salesperson.objects.get(id=pk)
+            salesperson.delete()
+            return JsonResponse(
+                salesperson,
+                encoder =SalespersonEncoder,
+                safe=False,
+            )
+        except Salesperson.DoesNotExist:
+            return JsonResponse({"message": "Employee does not exist"})
+
+    else:
+        try:
+            content = json.loads(request.body)
+            salesperson = Salesperson.objects.get(id=pk)
+            props = ["name", "employee_id"]
+            for prop in props:
+                if prop in content:
+                    setattr(salesperson, prop, content[prop])
+                    salesperson.save()
+                return JsonResponse(
+                    salesperson,
+                    encoder=SalespersonEncoder,
+                    safe=False,
+                )
+        except Salesperson.DoesNotExist:
+            response = JsonResponse({"message": "Employee does not exist"})
+            response.status_code = 404
+
+
+
+
+
 @require_http_methods(["GET", "POST"])
 def api_list_customers(request):
     if request.method == "GET":
@@ -41,4 +91,61 @@ def api_list_customers(request):
             customer,
             encoder=CustomerEncoder,
             safe=False,
+        )
+
+
+
+@require_http_methods(["GET", "PUT", "DELETE"])
+def api_show_customer(request, pk):
+    if request.method == "GET":
+        try:
+            customer = Customer.objects.get(id=pk)
+            return JsonResponse(
+                customer,
+                encoder=CustomerEncoder,
+                safe=False,
+            )
+        except Customer.DoesNotExist:
+            response = JsonResponse({"message": "Customer does not exist"})
+            response.status_code = 404
+            return response
+
+    elif request.method == "DELETE":
+        try:
+            customer = Customer.objects.get(id=pk)
+            customer.delete()
+            return JsonResponse(
+                customer,
+                encoder =CustomerEncoder,
+                safe=False,
+            )
+        except Customer.DoesNotExist:
+            return JsonResponse({"message": "Customer already deleted"})
+
+    else:
+        try:
+            content = json.loads(request.body)
+            customer = Customer.objects.get(id=pk)
+            props = ["name", "employee_id"]
+            for prop in props:
+                if prop in content:
+                    setattr(customer, prop, content[prop])
+                    customer.save()
+                return JsonResponse(
+                    customer,
+                    encoder=CustomerEncoder,
+                    safe=False,
+                )
+        except Customer.DoesNotExist:
+            response = JsonResponse({"message": "Customer does not exist"})
+            response.status_code = 404
+
+
+@require_http_methods(["GET"])
+def api_list_automobileVO(request):
+    if request.method == "GET":
+        automobiles = AutomobileVO.objects.all()
+        return JsonResponse({
+            "automobiles": automobiles},
+            encoder = AutomobileVOEncoder
         )
