@@ -1,5 +1,6 @@
 import React from 'react';
 import {useEffect, useState} from "react"
+import {Link} from "react-router-dom"
 
 function ManufacturerList() {
     const [manufacturers, setManufacturers] = useState([]);
@@ -41,6 +42,9 @@ function ManufacturerList() {
           <div className="d-grid gap-2 d-sm-flex justify-content-sm-center">
       </div>
       </div>
+      <div className="d-grid gap-2 d-sm-flex justify-content-sm-center">
+        <Link to ="/manufacturers/new" className="btn btn-primary btn-lg px-4 gap-3">Create a new Manufacturer !</Link>
+        </div>
           </>
         );
       }
