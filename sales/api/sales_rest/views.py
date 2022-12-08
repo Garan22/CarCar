@@ -51,7 +51,9 @@ def api_show_salesperson(request, pk):
                 safe=False,
             )
         except Salesperson.DoesNotExist:
-            return JsonResponse({"message": "Employee does not exist"})
+            response = JsonResponse({"message": "Employee already deleted"})
+            response.status_code = 404
+            return response 
 
     else:
         try:
@@ -120,7 +122,9 @@ def api_show_customer(request, pk):
                 safe=False,
             )
         except Customer.DoesNotExist:
-            return JsonResponse({"message": "Customer already deleted"})
+            response = JsonResponse({"message": "Customer already deleted"})
+            response.status_code = 404
+            return response
 
     else:
         try:
@@ -149,3 +153,18 @@ def api_list_automobileVO(request):
             "automobiles": automobiles},
             encoder = AutomobileVOEncoder
         )
+
+
+@require_http_methods(["GET", "POST"])
+def api_list_sales_records(request, employee_id=None):
+    if request.method == "GET":
+        sales_records = SalesRecord.objects.all()
+        return JsonResponse(
+            {"sales_records": sales_records},
+            encoder = SalesRecordEncoder
+        )
+
+    elif request.method == "POST":
+        if AutomobileVO.vehicleSold == True:
+            response = JsonResponse ({"message": "Vehicle no longer in our inventory"})
+            response.status_code = 404

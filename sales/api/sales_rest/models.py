@@ -59,4 +59,4 @@ class SalesRecord(models.Model):
     )
 
     def get_api_url(self):
-        return reverse("api_sales_record", kwargs={"pk": self.pk})
+        return reverse("api_show_sales_record", kwargs={"pk": self.pk})
