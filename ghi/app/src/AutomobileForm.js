@@ -46,7 +46,7 @@ const AutomobileForm = () => {
                 setVin('');
                 setModel('');
             })
-            .catch(e => console.log('error: ', e));
+            .catch(e => console.error('error: ', e));
     }
 
 

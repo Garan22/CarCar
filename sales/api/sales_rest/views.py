@@ -72,12 +72,12 @@ def api_show_salesperson(request, pk):
             for prop in props:
                 if prop in content:
                     setattr(salesperson, prop, content[prop])
-                salesperson.save()
-                return JsonResponse(
-                    salesperson,
-                    encoder=SalespersonEncoder,
-                    safe=False,
-                )
+            salesperson.save()
+            return JsonResponse(
+                salesperson,
+                encoder=SalespersonEncoder,
+                safe=False,
+            )
         except Salesperson.DoesNotExist:
             response = JsonResponse({"message": "Employee does not exist"})
             response.status_code = 404
@@ -144,12 +144,12 @@ def api_show_customer(request, pk):
             for prop in props:
                 if prop in content:
                     setattr(customer, prop, content[prop])
-                    customer.save()
-                return JsonResponse(
-                    customer,
-                    encoder=CustomerEncoder,
-                    safe=False,
-                )
+            customer.save()
+            return JsonResponse(
+                customer,
+                encoder=CustomerEncoder,
+                safe=False,
+            )
         except Customer.DoesNotExist:
             response = JsonResponse({"message": "Customer does not exist"})
             response.status_code = 404

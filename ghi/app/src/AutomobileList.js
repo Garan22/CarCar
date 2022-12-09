@@ -11,7 +11,7 @@ function AutomobileList() {
                 .then(data => {
                     setAutos(data.autos);
                 })
-                .catch(e => console.log('error: ', e));
+                .catch(e => console.error('error: ', e));
         }, [])
 
 
