@@ -12,7 +12,7 @@ def api_list_salespersons(request):
     if request.method == "GET":
         salesteam = Salesperson.objects.all()
         return JsonResponse(
-            {"Sales_Team": salesteam},
+            {"salesTeam": salesteam},
             encoder=SalespersonEncoder
         )
 
