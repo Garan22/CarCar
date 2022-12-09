@@ -1,100 +1,94 @@
-import React from 'react'
+import React, {useEffect, useState } from 'react'
 
-class VehicleModelForm extends React.Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            id: '',
-            name: '',
-            picture_url: '',
-            manufacturer: '',
-            manufacturers: [],
-        }
-        // this.handleIdChange = this.handleIdChange.bind(this)
-        this.handleNameChange = this.handleNameChange.bind(this)
-        this.handlePicture_UrlChange = this.handlePicture_UrlChange.bind(this)
-        this.handleManufacturerChange = this.handleManufacturerChange.bind(this)
-        this.handleSubmit = this.handleSubmit.bind(this)
-    }
-    async componentDidMount(){
-        const url = 'http://localhost:8100/api/manufacturer/'
+const VehicleModelForm = () => {
 
-        const response = await fetch(url)
 
-        if(response.ok) {
-            const data = await response.json()
-            this.setState({ manufacturer: data.manufacturer })
-        }
-    }
+  const [name, setName] = useState('')
+  const [picture_url, setPicture_Url] = useState('')
+  const [manufacturer_id, setManufacturer_Id] = useState('')
+  const [manufacturers, setManufacturers] = useState([])
 
-    async handleSubmit(event) {
-        event.preventDefault()
-        const data = {...this.state}
-        delete data.manufacturer
 
-        const modelUrl = 'http://localhost:8100/api/models/'
-        const fetchConfig = {
-            method: "post",
-            body: JSON.stringify(data),
-            headers: {
-                'Content-Type': 'application/json'
-            },
-        }
+  useEffect(() => {
+      const manufacturersUrl = 'http://localhost:8100/api/manufacturers/'
+      fetch(manufacturersUrl)
+          .then(response => response.json())
+          .then(data => setManufacturers(data.manufacturers ))
+          .catch(e => console.error('error: ', e))
+  }, [])
 
-        const response = await fetch(modelUrl, fetchConfig)
-        if (response.ok) {
-            const newModel = await response.json()
-            console.log(newModel)
+  const handleSubmit = (event) => {
+      event.preventDefault()
+      const newVehicleModel = {
+          'name': name,
+          'picture_url': picture_url,
+          'manufacturer_id': manufacturer_id,
+      }
 
-            const cleared = {
-                id: '',
-                name: '',
-                picture_url: '',
-                manufacturer: '',
-            }
-            this.setState(cleared)
-        }
+      console.log(newVehicleModel)
 
-    }
+      const modelUrl = "http://localhost:8100/api/models/"
+      const fetchConfig = {
+          method: "post",
+          body: JSON.stringify(newVehicleModel),
+          headers: {
+              'Content-Type': 'application/json',
+          },
+      }
+
+      fetch(modelUrl, fetchConfig)
+          .then(response => response.json())
+          .then(() => {
+              setName('')
+              setPicture_Url('')
+              setManufacturer_Id('')
+          })
+          .catch(e => console.log('error: ', e));
+  }
 
     // handleIdChange(event) {
     //     const value = event.target.value
     //     this.setState({id: value})
     // }
-    handleNameChange(event) {
+    const handleNameChange = (event) => {
         const value = event.target.value
-        this.setState({name: value})
+        setName(value)
     }
-    handlePicture_UrlChange(event) {
+    const handlePicture_UrlChange = (event) => {
         const value = event.target.value
-        this.setState({picture_url: value})
+        setPicture_Url(value)
     }
-    handleManufacturerChange(event) {
+    const handleManufacturer_IdChange = (event) => {
         const value = event.target.value
-        this.setState({manufacturer: value})
+        setManufacturer_Id(value)
     }
-    render(){
         return (
           <div className="row">
             <div className="offset-3 col-6">
               <div className="shadow p-4 mt-4">
                 <h1>Create a new Vehicle Model</h1>
-                <form onSubmit={this.handleSubmit} id="create-Vehicle-Model-form">
+                <form onSubmit={handleSubmit} id="create-Vehicle-Model-form">
 
                   <div className="form-floating mb-3">
-                    <input value={this.state.model_name} onChange={this.handleNameChange} placeholder="Name" required type="text" name="Name" id="Name" className="form-control" />
+                    <input value={name} onChange={handleNameChange} placeholder="Name" required type="text" name="Name" id="Name" className="form-control" />
                     <label htmlFor="Name">Name</label>
                   </div>
 
                   <div className="form-floating mb-3">
-                    <input value={this.state.picture_url} onChange={this.handlePicture_UrlChange} placeholder="picture_url" type="url" name="picture_url" id="picture_url" className="form-control" />
-                    <label htmlFor="picture url">picture Url (optional)</label>
+                    <input value={picture_url} onChange={handlePicture_UrlChange} placeholder="picture_url"required type="url" name="picture_url" id="picture_url" className="form-control" />
+                    <label htmlFor="picture url">picture Url</label>
                   </div>
 
-                  <div className="form-floating mb-3">
-                    <input onChange={this.handleManufacturerChange} value={this.state.manufacturer} placeholder="manufacturer" required type="text" name="manufacturer" id="manufacturer" className="form-control" />
-                    <label htmlFor="manufacturer">Manufacturer</label>
-                  </div>
+                  <div className="mb-3">
+                    <select value={manufacturer_id} onChange={handleManufacturer_IdChange} required name="manufacturer" id="manufacturer" className="form-select">
+                    <option value="">Choose a manufacturer</option>
+                    {manufacturers.map(manufacturer_id => {
+                        return (
+                        <option key={manufacturer_id.id} value={manufacturer_id.id }>{manufacturer_id.name}</option>
+                    );
+                  })}
+                    </select>
+                    </div>
 
                   <button className="btn btn-primary">Create</button>
                 </form>
@@ -103,5 +97,4 @@ class VehicleModelForm extends React.Component {
           </div>
         );
       }
-    }
     export default VehicleModelForm
