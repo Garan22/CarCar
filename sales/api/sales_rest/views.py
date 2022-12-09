@@ -17,13 +17,22 @@ def api_list_salespersons(request):
         )
 
     else:
-        content = json.loads(request.body)
-        salesperson = Salesperson.objects.create(**content)
-        return JsonResponse(
-            salesperson,
-            encoder=SalespersonEncoder,
-            safe=False
-        )
+        try:
+            content = json.loads(request.body)
+            salesperson = Salesperson.objects.create(**content)
+            return JsonResponse(
+                salesperson,
+                encoder=SalespersonEncoder,
+                safe=False
+            )
+        except:
+            response = JsonResponse(
+                {"Message": "Could not create a salesperson"}
+            )
+
+            response.status_code = 400
+            return response
+
 
 
 @require_http_methods(["GET", "PUT", "DELETE"])
@@ -51,9 +60,9 @@ def api_show_salesperson(request, pk):
                 safe=False,
             )
         except Salesperson.DoesNotExist:
-            response = JsonResponse({"message": "Employee already deleted"})
+            response = JsonResponse({"message": "Employee does not exist"})
             response.status_code = 404
-            return response 
+            return response
 
     else:
         try:
@@ -63,7 +72,7 @@ def api_show_salesperson(request, pk):
             for prop in props:
                 if prop in content:
                     setattr(salesperson, prop, content[prop])
-                    salesperson.save()
+                salesperson.save()
                 return JsonResponse(
                     salesperson,
                     encoder=SalespersonEncoder,
@@ -72,6 +81,7 @@ def api_show_salesperson(request, pk):
         except Salesperson.DoesNotExist:
             response = JsonResponse({"message": "Employee does not exist"})
             response.status_code = 404
+            return response
 
 
 
@@ -122,7 +132,7 @@ def api_show_customer(request, pk):
                 safe=False,
             )
         except Customer.DoesNotExist:
-            response = JsonResponse({"message": "Customer already deleted"})
+            response = JsonResponse({"message": "Customer does not exist"})
             response.status_code = 404
             return response
 
@@ -130,7 +140,7 @@ def api_show_customer(request, pk):
         try:
             content = json.loads(request.body)
             customer = Customer.objects.get(id=pk)
-            props = ["name", "employee_id"]
+            props = ["name", "address", "phone"]
             for prop in props:
                 if prop in content:
                     setattr(customer, prop, content[prop])
@@ -143,6 +153,7 @@ def api_show_customer(request, pk):
         except Customer.DoesNotExist:
             response = JsonResponse({"message": "Customer does not exist"})
             response.status_code = 404
+            return response
 
 
 @require_http_methods(["GET"])
@@ -158,13 +169,41 @@ def api_list_automobileVO(request):
 @require_http_methods(["GET", "POST"])
 def api_list_sales_records(request, employee_id=None):
     if request.method == "GET":
-        sales_records = SalesRecord.objects.all()
+        if employee_id == None:
+            sales_records = SalesRecord.objects.all()
+        else:
+            sales_records = SalesRecord.objects.filter(salesperson=employee_id)
         return JsonResponse(
             {"sales_records": sales_records},
-            encoder = SalesRecordEncoder
+            encoder = SalesRecordEncoder,
+            safe=False
         )
 
-    elif request.method == "POST":
-        if AutomobileVO.vehicleSold == True:
-            response = JsonResponse ({"message": "Vehicle no longer in our inventory"})
+    else:
+        try:
+            content = json.loads(request.body)
+            automobile_vin = content["automobile"]
+            automobile = AutomobileVO.objects.get(vin=automobile_vin)
+            content["automobile"] = automobile
+
+            employee_id = content["salesperson"]
+            salesperson = Salesperson.objects.get(id=employee_id)
+            content["salesperson"] = salesperson
+
+            customer_id = content["customer"]
+            customer = Customer.objects.get(id=customer_id)
+            content["customer"] = customer
+
+            sales_record = SalesRecord.objects.create(**content)
+            automobile.vehicleSold=True
+            automobile.save()
+            return JsonResponse(
+                sales_record,
+                encoder=SalesRecordEncoder,
+                safe=False
+            )
+
+        except Salesperson.DoesNotExist:
+            response = JsonResponse({"message": "Salesrep does not exist"})
             response.status_code = 404
+            return response
