@@ -1,5 +1,5 @@
 from common.json import ModelEncoder
-from .models import AutoTechnician, ServiceAppointment, AutomobileVO
+from .models import AutoTechnician, ServiceAppointment, AutomobileVO, Status
 
 class AutoTechnicianEncoder(ModelEncoder):
     model = AutoTechnician
@@ -7,6 +7,13 @@ class AutoTechnicianEncoder(ModelEncoder):
         "id",
         "name",
         "employee_number",
+    ]
+
+class StatusEncoder(ModelEncoder):
+    model = Status
+    properties = [
+        "cancel",
+        "finish",
     ]
 
 class ServiceAppointmentEncoder(ModelEncoder):
@@ -18,10 +25,12 @@ class ServiceAppointmentEncoder(ModelEncoder):
         "date",
         "time",
         "service_reason",
-        "technician"
+        "technician",
+        "status"
     ]
     encoders = {
         "technician": AutoTechnicianEncoder(),
+        "status": StatusEncoder(),
     }
 
 class AutomobileVOEncoder(ModelEncoder):
