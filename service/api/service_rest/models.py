@@ -9,9 +9,11 @@ class AutoTechnician(models.Model):
     def __str__(self):
         return self.name
 
+
 class Status(models.Model):
     cancel = models.BooleanField(default=False)
     finish = models.BooleanField(default=False)
+
 
 class ServiceAppointment(models.Model):
     vin = models.CharField(max_length=17, unique=True)
@@ -29,6 +31,7 @@ class ServiceAppointment(models.Model):
 
     def __str__(self):
         return self.customer_name
+
 
 class AutomobileVO(models.Model):
     import_href =  models.CharField(max_length=200, blank=True, null=True, unique=True)
