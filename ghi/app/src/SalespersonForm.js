@@ -1,38 +1,35 @@
 import React, {useState} from 'react';
 
-const CustomerForm = () => {
+const SalespersonForm = () => {
 
 
     const [name, setName] = useState('');
-    const [address, setAddress] = useState('');
-    const [phone, setPhone] = useState('');
+    const [employee_id, setEmployee_Id] = useState('');
 
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        const newCustomer = {
+        const newSalesperson = {
             'name': name,
-            'address': address,
-            'phone': phone,
+            'employee_id': employee_id,
         }
 
-        console.log(newCustomer)
+        console.log(newSalesperson)
 
-        const customerUrl = "http://localhost:8090/api/customers/";
+        const salesTeamUrl = "http://localhost:8090/api/salesteam/";
         const fetchConfig = {
             method: "post",
-            body: JSON.stringify(newCustomer),
+            body: JSON.stringify(newSalesperson),
             headers: {
                 'Content-Type': 'application/json',
             },
         };
 
-        fetch(customerUrl, fetchConfig)
+        fetch(salesTeamUrl, fetchConfig)
             .then(response => response.json())
             .then(() => {
                 setName('');
-                setAddress('');
-                setPhone('');
+                setEmployee_Id('');
             })
             .catch(e => console.log('error: ', e));
     }
@@ -43,16 +40,11 @@ const CustomerForm = () => {
         setName(value);
     }
 
-    const handleAddressChange = (event) => {
+    const handleEmployee_IdChange = (event) => {
         const value = event.target.value;
-        setAddress(value);
+        setEmployee_Id(value);
     }
 
-    const handlePhoneChange = (event) => {
-
-        const value = event.target.value;
-        setPhone(value);
-    }
 
     return (
         <div className="row">
@@ -65,12 +57,8 @@ const CustomerForm = () => {
                             <label>Name</label>
                         </div>
                         <div className="form-floating mb-3">
-                            <input value={address} onChange={handleAddressChange} required type="text" name="address" id="address" className="form-control" />
-                            <label>Address</label>
-                        </div>
-                        <div className="form-floating mb-3">
-                            <input value={phone} onChange={handlePhoneChange} required type="text" name="phone" id="phone" maxLength={12} className="form-control" />
-                            <label>Phone (Use this format: XXX-XXX-XXXX)</label>
+                            <input value={employee_id} onChange={handleEmployee_IdChange} required type="number" name="employee_id" id="employee_id" className="form-control" />
+                            <label>Employee_id</label>
                         </div>
                         <button className="btn btn-primary">Create</button>
                     </form>
@@ -80,4 +68,4 @@ const CustomerForm = () => {
     );
 }
 
-export default CustomerForm;
+export default SalespersonForm;

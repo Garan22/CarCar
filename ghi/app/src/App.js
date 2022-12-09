@@ -6,6 +6,7 @@ import MainPage from './MainPage';
 import ManufacturerForm from './ManufacturerForm';
 import ManufacturerList from './ManufacturerList';
 import Nav from './Nav';
+import SalespersonForm from './SalespersonForm';
 import VehicleModelForm from './VehicleModelForm';
 import VehicleModelList from './VehicleModelList';
 
@@ -24,6 +25,7 @@ function App() {
           <Route path= "/automobiles" element={<AutomobileList/>}></Route>
           <Route path= "/automobiles/new" element={<AutomobileForm/>}></Route>
           <Route path= "/customers/new" element={<CustomerForm/>}></Route>
+          <Route path= "/salesteam/new" element={<SalespersonForm/>}></Route>
         </Routes>
       </div>
     </BrowserRouter>
