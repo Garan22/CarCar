@@ -203,7 +203,7 @@ def api_list_sales_records(request, employee_id=None):
                 safe=False
             )
 
-        except Salesperson.DoesNotExist:
+        except automobile.vehicleSold:
             response = JsonResponse({"message": "Salesrep does not exist"})
             response.status_code = 404
             return response
