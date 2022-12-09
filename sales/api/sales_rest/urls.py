@@ -7,5 +7,6 @@ urlpatterns = [
     path("automobiles/", api_list_automobileVO, name="api_list_automobiles" ),
     path("salesteam/<int:pk>/", api_show_salesperson, name="api_show_salesperson"),
     path("customers/<int:pk>/", api_show_customer, name="api_show_customer"),
-    path("salesrecords/", api_list_sales_records, name="api_create_sales_records"), 
+    path("salesrecords/", api_list_sales_records, name="api_create_sales_records"),
+    path("sales/", api_list_sales_records, name="api_list_sales_records"),
 ]

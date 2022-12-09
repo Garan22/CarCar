@@ -35,6 +35,11 @@ class Customer(models.Model):
         return self.name
 
 
+    def get_api_url(self):
+        return reverse("api_show_customer", kwargs={"pk": self.pk})
+
+
+
 class SalesRecord(models.Model):
 
     price = models.DecimalField(max_digits=12, decimal_places=2)
