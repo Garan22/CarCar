@@ -21,7 +21,7 @@ class ServiceAppointmentEncoder(ModelEncoder):
         "technician"
     ]
     encoders = {
-        "technician": AutoTechnicianEncoder
+        "technician": AutoTechnicianEncoder(),
     }
 
 class AutomobileVOEncoder(ModelEncoder):
