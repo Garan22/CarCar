@@ -170,11 +170,11 @@ def api_list_automobileVO(request):
 def api_list_sales_records(request, employee_id=None):
     if request.method == "GET":
         if employee_id == None:
-            sales_records = SalesRecord.objects.all()
+            salesrecords = SalesRecord.objects.all()
         else:
-            sales_records = SalesRecord.objects.filter(employee_id=employee_id)
+            salesrecords = SalesRecord.objects.filter(employee_id=employee_id)
         return JsonResponse(
-            {"sales_records": sales_records},
+            {"salesrecords": salesrecords},
             encoder = SalesRecordEncoder,
             safe=False
         )

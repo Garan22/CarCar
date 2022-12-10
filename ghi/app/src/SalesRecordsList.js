@@ -2,14 +2,14 @@ import React from 'react';
 import { Link } from 'react-router-dom'
 import {useEffect, useState} from "react"
 
-function AutomobileList() {
-    const [autos, setAutos] = useState([]);
+function SalesRecordList() {
+    const [salesrecords, setSalesrecords] = useState([]);
 
     useEffect(() => {
-            fetch('http://localhost:8100/api/automobiles/')
+            fetch('http://localhost:8090/api/sales/')
                 .then(response => response.json())
                 .then(data => {
-                    setAutos(data.autos);
+                    setSalesrecords(data.salesrecords);
                 })
                 .catch(e => console.error('error: ', e));
         }, [])
@@ -21,29 +21,27 @@ function AutomobileList() {
         <>
         <div>
           <h1 className="text-center">
-            Automobiles List
-          </h1>
+            Sales Records List
+            </h1>
         </div>
         <div className="d-grid gap-2 d-sm-flex justify-content-sm-center">
         <table className="table table-bordered">
             <thead>
               <tr>
+                <th>Salesperson</th>
+                <th>Customer</th>
                 <th>Vin</th>
-                <th>Year</th>
-                <th>Color</th>
-                <th>Model</th>
-                <th>Manufacturer</th>
+                <th>Sales Price</th>
               </tr>
             </thead>
             <tbody>
-              {autos.map(auto => {
+              {salesrecords.map(sale => {
                 return (
-                  <tr key={auto.id}>
-                    <td>{auto.vin}</td>
-                    <td>{auto.year}</td>
-                    <td>{auto.color}</td>
-                    <td>{auto.model.name}</td>
-                    <td>{auto.model.manufacturer.name}</td>
+                  <tr key={sale.id}>
+                    <td>{sale.salesperson.name}</td>
+                    <td>{sale.customer.name}</td>
+                    <td>{sale.automobile.vin}</td>
+                    <td>${sale.price}</td>
                   </tr>
                 );
               })}
@@ -51,10 +49,10 @@ function AutomobileList() {
           </table>
         </div>
         <div className="d-grid gap-2 d-sm-flex justify-content-sm-center">
-        <Link to ="/automobiles/new" className="btn btn-primary btn-lg px-4 gap-3">Create a new Automobile !</Link>
+        <Link to ="/salesrecord/new" className="btn btn-primary btn-lg px-4 gap-3">Record a new Sale !</Link>
         </div>
           </>
         );
       }
 
-      export default AutomobileList;
+      export default SalesRecordList;

@@ -46,7 +46,7 @@ const SalesRecordForm = () => {
         }
 
         console.log(newSaleRecord)
-        
+
         const salerecord_url = "http://localhost:8090/api/sales/"
         const fetchConfig = {
             method: "post",
@@ -95,7 +95,7 @@ const SalesRecordForm = () => {
         <div className="row">
             <div className="offset-3 col-6">
                 <div className="shadow p-4 mt-4">
-                    <h1>Create a Automobile</h1>
+                    <h1>Record a Sale</h1>
                     <form onSubmit={handleSubmit} id="create-bin-form">
                         <div className="form-floating mb-3">
                             <input value={price} onChange={handlePriceChange} required type="number" name="number" id="number" className="form-control" />
@@ -129,6 +129,10 @@ const SalesRecordForm = () => {
                         </div>
                         <button className="btn btn-primary">Create</button>
                     </form>
+                    <br></br>
+                    <a href="/salesrecords/">
+                        <button className="btn btn-outline-danger">Back to Sales Records</button>
+                    </a>
                 </div>
             </div>
         </div>

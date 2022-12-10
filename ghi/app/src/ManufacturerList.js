@@ -21,8 +21,12 @@ function ManufacturerList() {
 
     return (
         <>
+        <div>
+          <h1 className="text-center">
+            Manufacturers List
+          </h1>
+        </div>
         <div className="d-grid gap-2 d-sm-flex justify-content-sm-center">
-
         <table className="table table-bordered">
             <thead>
               <tr>

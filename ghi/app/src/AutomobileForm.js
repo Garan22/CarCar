@@ -81,7 +81,7 @@ const AutomobileForm = () => {
                             <label>Color</label>
                         </div>
                         <div className="form-floating mb-3">
-                            <input value={year} onChange={handleYearChange} required type="text" name="year" id="year" className="form-control" />
+                            <input value={year} onChange={handleYearChange} required type="number" name="year" id="year" className="form-control" />
                             <label>Year</label>
                         </div>
                         <div className="form-floating mb-3">
