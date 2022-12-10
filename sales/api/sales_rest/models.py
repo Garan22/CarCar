@@ -42,7 +42,7 @@ class Customer(models.Model):
 
 class SalesRecord(models.Model):
 
-    price = models.DecimalField(max_digits=12, decimal_places=2)
+    price = models.PositiveIntegerField()
 
     automobile= models.ForeignKey(
         AutomobileVO,
@@ -62,6 +62,9 @@ class SalesRecord(models.Model):
         on_delete=models.CASCADE,
 
     )
+
+    def __str__(self):
+        return self.salesperson
 
     def get_api_url(self):
         return reverse("api_show_sales_record", kwargs={"pk": self.pk})

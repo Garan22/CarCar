@@ -12,7 +12,7 @@ def api_list_salespersons(request):
     if request.method == "GET":
         salesteam = Salesperson.objects.all()
         return JsonResponse(
-            {"salesTeam": salesteam},
+            {"salesteam": salesteam},
             encoder=SalespersonEncoder
         )
 
@@ -172,7 +172,7 @@ def api_list_sales_records(request, employee_id=None):
         if employee_id == None:
             sales_records = SalesRecord.objects.all()
         else:
-            sales_records = SalesRecord.objects.filter(salesperson=employee_id)
+            sales_records = SalesRecord.objects.filter(employee_id=employee_id)
         return JsonResponse(
             {"sales_records": sales_records},
             encoder = SalesRecordEncoder,
@@ -180,30 +180,48 @@ def api_list_sales_records(request, employee_id=None):
         )
 
     else:
-        try:
-            content = json.loads(request.body)
-            automobile_vin = content["automobile"]
-            automobile = AutomobileVO.objects.get(vin=automobile_vin)
-            content["automobile"] = automobile
 
-            employee_id = content["salesperson"]
-            salesperson = Salesperson.objects.get(id=employee_id)
+        content = json.loads(request.body)
+        automobile_vin = content["automobile"]
+        employee_id = content["salesperson"]
+        customer_id = content["customer"]
+
+        try:
+            automobile = AutomobileVO.objects.get(vin=automobile_vin)
+            if automobile.vehicleSold == False:
+                content["automobile"] = automobile
+
+            else:
+                response = JsonResponse({"Alert": "This vehicle is no longer available in our inventory"})
+                response.status_code = 404
+                return response
+
+        except AutomobileVO.DoesNotExist:
+            response = JsonResponse({"Message": "Vehicle does not exist"})
+
+
+        try:
+            salesperson = Salesperson.objects.get(employee_id=employee_id)
             content["salesperson"] = salesperson
 
-            customer_id = content["customer"]
+        except Salesperson.DoesNotExist:
+            response = JsonResponse({"Message": "Salesperson does not exist"})
+            response.status_code = 404
+            return response
+
+        try:
             customer = Customer.objects.get(id=customer_id)
             content["customer"] = customer
 
-            sales_record = SalesRecord.objects.create(**content)
-            automobile.vehicleSold=True
-            automobile.save()
-            return JsonResponse(
-                sales_record,
-                encoder=SalesRecordEncoder,
-                safe=False
-            )
-
-        except automobile.vehicleSold:
-            response = JsonResponse({"message": "Salesrep does not exist"})
+        except Customer.DoesNotExist:
+            response = JsonResponse({"Message": "Customer not found, please add Customer to database"})
             response.status_code = 404
             return response
+
+        record_sale = SalesRecord.objects.create(**content)
+        AutomobileVO.objects.filter(vin=automobile_vin).update(vehicleSold=True)
+        return JsonResponse(
+            record_sale,
+            encoder=SalesRecordEncoder,
+            safe=False
+        )
