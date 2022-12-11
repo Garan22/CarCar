@@ -25,8 +25,6 @@ const VehicleModelForm = () => {
           'manufacturer_id': manufacturer_id,
       }
 
-      console.log(newVehicleModel)
-
       const modelUrl = "http://localhost:8100/api/models/"
       const fetchConfig = {
           method: "post",
@@ -43,7 +41,7 @@ const VehicleModelForm = () => {
               setPicture_Url('')
               setManufacturer_Id('')
           })
-          .catch(e => console.log('error: ', e));
+          .catch(e => console.error('error: ', e));
   }
 
     // handleIdChange(event) {

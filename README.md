@@ -2,10 +2,10 @@
 
 Team:
 
-* Person 1 - Which microservice?
+* Khaled Azimi - Sales
 * Person 2 - Which microservice?
 
-## Design
+Running Project
 
 ## Service microservice
 
@@ -16,3 +16,4 @@ microservice, here.
 
 Explain your models and integration with the inventory
 microservice, here.
+

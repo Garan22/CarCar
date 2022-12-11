@@ -11,7 +11,7 @@ function ManufacturerList() {
             .then(data => {
                 setManufacturers(data.manufacturers);
             })
-            .catch(e => console.log('error: ', e));
+            .catch(e => console.error('error: ', e));
     }, [])
 
 

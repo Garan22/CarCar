@@ -10,7 +10,7 @@ function VehicleModelList() {
               .then(data => {
                   setModels(data.models);
               })
-              .catch(e => console.log('error: ', e));
+              .catch(e => console.error('error: ', e));
       }, [])
 
   // const deleteVehicleModel = async (model) => {
