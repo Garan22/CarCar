@@ -5,7 +5,7 @@ import {useEffect, useState} from "react"
 function SalesRecordHistoryList() {
     const [salesrecords, setSalesrecords] = useState([]);
     const [salesteam, setSalesTeam] = useState([]);
-    const [filteredsales, setFilteredSales] = useState("");
+    const [selection, setSelection] = useState("");
 
 
     useEffect(() => {
@@ -29,12 +29,12 @@ function SalesRecordHistoryList() {
 
     const handleSalespersonChange = (event) => {
         const value = event.target.value
-        setFilteredSales(value)
+        setSelection(value)
 
     }
 
     let results = "table table-bordered d-none"
-    if (filteredsales !== "") {
+    if (selection !== "") {
         results = "table table-bordered"
     }
 
@@ -70,7 +70,7 @@ function SalesRecordHistoryList() {
             <tbody>
               {salesrecords.map(sale => {
 
-                if (sale.salesperson.id == filteredsales) {
+                if (sale.salesperson.id == selection) {
 
                 return (
                   <tr key={sale.id}>
