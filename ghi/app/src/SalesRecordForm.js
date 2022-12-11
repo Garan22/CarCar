@@ -45,7 +45,6 @@ const SalesRecordForm = () => {
             "price": price,
         }
 
-        console.log(newSaleRecord)
 
         const salerecord_url = "http://localhost:8090/api/sales/"
         const fetchConfig = {

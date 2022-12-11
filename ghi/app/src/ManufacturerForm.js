@@ -6,7 +6,6 @@ const ManufacturerForm = () => {
     const handleSubmit = (event) => {
         event.preventDefault();
         const newManufacturer = {"name": manufacturerName}
-        console.log(newManufacturer)
         const manufacturerURL = 'http://localhost:8100/api/manufacturers/';
         const fetchConfig = {
             method: "post",
@@ -20,7 +19,7 @@ const ManufacturerForm = () => {
             .then(() => {
                 setManufacturerName('');
             })
-            .catch(e => console.log("error", e))
+            .catch(e => console.error("error", e))
 
     }
 

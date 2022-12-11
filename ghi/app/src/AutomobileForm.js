@@ -27,8 +27,6 @@ const AutomobileForm = () => {
             'model_id': model_id,
         }
 
-        console.log(newAuto)
-
         const autoUrl = "http://localhost:8100/api/automobiles/";
         const fetchConfig = {
             method: "post",

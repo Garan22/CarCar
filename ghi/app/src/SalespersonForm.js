@@ -14,7 +14,6 @@ const SalespersonForm = () => {
             'employee_id': employee_id,
         }
 
-        console.log(newSalesperson)
 
         const salesTeamUrl = "http://localhost:8090/api/salesteam/";
         const fetchConfig = {

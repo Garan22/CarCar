@@ -29,12 +29,12 @@ function App() {
           <Route path= "/models/new" element={<VehicleModelForm/>}></Route>
           <Route path= "/automobiles" element={<AutomobileList/>}></Route>
           <Route path= "/automobiles/new" element={<AutomobileForm/>}></Route>
-          <Route path= "/customers/new" element={<CustomerForm/>}></Route>
+          <Route path="/customers/new" element={<CustomerForm/>}></Route>
           <Route path= "/salesteam/new" element={<SalespersonForm/>}></Route>
           <Route path="/autotechnician" element={<AutoTechnicianForm/>}></Route>
           <Route path="/salesrecord/new" element={<SalesRecordForm/>}></Route>
-          <Route path="/salesrecords/" element={<SalesRecordList/>}></Route>
-          <Route path="/salesrecord/history/" element={<SalesRecordHistoryList/>}></Route>
+          <Route path="/salesrecords" element={<SalesRecordList/>}></Route>
+          <Route path="/salesrecords/history" element={<SalesRecordHistoryList/>}></Route>
         </Routes>
       </div>
     </BrowserRouter>

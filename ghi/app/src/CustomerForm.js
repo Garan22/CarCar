@@ -16,8 +16,6 @@ const CustomerForm = () => {
             'phone': phone,
         }
 
-        console.log(newCustomer)
-
         const customerUrl = "http://localhost:8090/api/customers/";
         const fetchConfig = {
             method: "post",
@@ -34,7 +32,7 @@ const CustomerForm = () => {
                 setAddress('');
                 setPhone('');
             })
-            .catch(e => console.log('error: ', e));
+            .catch(e => console.error('error: ', e));
     }
 
 
