@@ -50,6 +50,8 @@ function SalesRecordList() {
         </div>
         <div className="d-grid gap-2 d-sm-flex justify-content-sm-center">
         <Link to ="/salesrecord/new" className="btn btn-primary btn-lg px-4 gap-3">Record a new Sale !</Link>
+        <Link to ="/salesrecords/history" className="btn btn-primary btn-lg px-4 gap-3">View sales by Salesperson</Link>
+
         </div>
           </>
         );
