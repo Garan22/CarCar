@@ -33,7 +33,7 @@ function SalesRecordHistoryList() {
 
     }
 
-    let results = "table table-bordered d-none" 
+    let results = "table table-bordered d-none"
     if (filteredsales !== "") {
         results = "table table-bordered"
     }
@@ -54,7 +54,7 @@ function SalesRecordHistoryList() {
                             </select>
         <div>
           <h1 className="text-center">
-            Sales Records List
+            Sales Records List for selected Salesperson
             </h1>
         </div>
         <div className="d-grid gap-2 d-sm-flex justify-content-sm-center">
