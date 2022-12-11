@@ -11,7 +11,7 @@ def api_AutoTechnician_list(request):
         technician = AutoTechnician.objects.all()
         return JsonResponse(
             {"technician": technician},
-            encoder=AutoTechnicianEncoder,
+            encoder=AutoTechnicianEncoder, safe=False,
         )
     else:
         try:
