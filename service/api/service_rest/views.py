@@ -87,9 +87,15 @@ def api_ServiceAppointments_list(request):
         )
     else:
         content = json.loads(request.body)
+
         try:
             service_technician = {"technician": AutoTechnician.objects.get(id=content["technician"])}
             content.update(service_technician)
+
+
+            inventory = AutomobileVO.objects.all().values_list('vin', flat=True)
+            if content["vin"] in inventory:
+                content["dealership_purchase"] = True
             service_appointments = ServiceAppointment.objects.create(**content)
             return JsonResponse(
                 service_appointments, encoder=ServiceAppointmentEncoder,

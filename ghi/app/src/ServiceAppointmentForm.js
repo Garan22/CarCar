@@ -85,7 +85,7 @@ const ServiceAppointmentForm = () => {
         <div className="row">
           <div className="offset-3 col-6">
             <div className="shadow p-4 mt-4">
-              <h1>Create a new Auto Technician</h1>
+              <h1>Create a new Service Appointment</h1>
               <form onSubmit={handleSubmit} id="create-Service-Appointment-form">
 
 
