@@ -39,10 +39,7 @@ microservice, here.
 The following models are located in the Sales microservice
 
 SalesRecord:
-
-The SalesRecord model consists of the:
-
-   - Price of the vehicle.
+   - Price of the vehicle
    - Foreign key to the AutomobileVO model (this is a value object)
    - Foreign key to the Salesperson model
    - Foreign key to Customer model
@@ -50,23 +47,22 @@ The SalesRecord model consists of the:
 
 
 AutomobileVO:
+    - Import_href, which is polled from the inventory list of automobiles
+    - Color of the automobile
+    - Year of the automobile
+    - Vin of the vehicle
+    - vehicleSold which a boolean that will update once the sale of the automobile is posted
 
-The AutomobileVO consits of the
-
- - Import_href, which is polled from the inventory list of automobiles
- - Color of the automobile
- - Year of the automobile
- - Vin of the vehicle
- - vehicleSold which a boolean that will update once the sale of the automobile is posted
 
 Salesperson:
- - Name of the sales person
- - employee_id of the salesperson which is a unique value. (Employee_id can't be used twice)
+    - Name of the sales person
+    - employee_id of the salesperson which is a unique value. (Employee_id can't be used twice)
+
 
 Customer:
- - Name of the customer
- - Address of the customer
- - Phone number of the customer
+    - Name of the customer
+    - Address of the customer
+    - Phone number of the customer
 
 Information on how to create/delete/update instances of these in an api tool such as Insomnia can be viewed below.
 ```
