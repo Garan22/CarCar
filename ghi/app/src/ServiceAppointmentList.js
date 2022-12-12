@@ -16,27 +16,25 @@ function ServiceAppointmentList() {
                 .catch(e => console.error('error: ', e));
         }, [])
 
-        const OnDeleteServiceAppointmentClick = (service) => {
-            const serviceId = service.id
-            const idComponent = service.id.split('/')
-            const pk = idComponent[idComponent.length - 2]
-            const serviceUrl = `http://localhost:8080/api/serviceappointments/${pk}/`
-            const fetchConfig = {
-                method: "delete",
-                headers: {
-                    'Content-Type': 'application/json',
-                }
+    const OnDeleteServiceAppointmentClick = (service) => {
+        const pk = service.id
+        const serviceUrl = `http://localhost:8080/api/serviceappointments/${pk}/`
+        const fetchConfig = {
+            method: "delete",
+            headers: {
+                'Content-Type': 'application/json',
             }
-            fetch(serviceUrl, fetchConfig)
-                .then(response => response.json())
-                .then(data => {
-                    if (data.deleted) {
-                        const currentService = [...service_appointments]
-                        setService_Appointments(currentService.filter(service => service.id !== serviceId))
-                    }
-                })
-                .catch(e => console.log('error: ', e));
         }
+        fetch(serviceUrl, fetchConfig)
+            .then(response => response.json())
+            .then(data => {
+                if (data.deleted) {
+                    const currentService = [...service_appointments]
+                    setService_Appointments(currentService.filter(service => service.id !== pk))
+                }
+            })
+            .catch(e => console.log('error: ', e));
+    }
 
 
     return (

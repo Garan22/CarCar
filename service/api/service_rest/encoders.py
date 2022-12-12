@@ -23,8 +23,6 @@ class ServiceAppointmentEncoder(ModelEncoder):
         "dealership_purchase",
     ]
     encoders = {
-        # "date": DateEncoder(),
-        # "time": DateEncoder(),
         "technician": AutoTechnicianEncoder(),
     }
 
