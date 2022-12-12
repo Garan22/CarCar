@@ -35,21 +35,21 @@ Explain your models and integration with the inventory
 microservice, here.
 
 ## Sales microservice
-
+```
 The following models are located in the Sales microservice
 
-**SalesRecord**
+SalesRecord:
 
-The SalesRecord model consists of the
+The SalesRecord model consists of the:
 
-   - **Price** of the vehicle.
-   - Foreign key to the **AutomobileVO** model (this is a value object)
-   - Foreign key to the **Salesperson** model
-   - Foreign key to **Customer** model
+   - Price of the vehicle.
+   - Foreign key to the AutomobileVO model (this is a value object)
+   - Foreign key to the Salesperson model
+   - Foreign key to Customer model
 
-This model helps us create our Salesrecords.
 
-**AutomobileVO**
+
+AutomobileVO:
 
 The AutomobileVO consits of the
 
@@ -59,16 +59,17 @@ The AutomobileVO consits of the
  - Vin of the vehicle
  - vehicleSold which a boolean that will update once the sale of the automobile is posted
 
-**Salesperson**
+Salesperson:
  - Name of the sales person
  - employee_id of the salesperson which is a unique value. (Employee_id can't be used twice)
 
-**Customer**
+Customer:
  - Name of the customer
  - Address of the customer
  - Phone number of the customer
 
 Information on how to create/delete/update instances of these in an api tool such as Insomnia can be viewed below.
+```
 
 **Poller**
 
