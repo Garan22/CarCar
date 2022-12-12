@@ -1,5 +1,6 @@
 # **CarCar**
 
+![Cover](./imagefolder/CarCar.png)
 
 
 Team:
@@ -75,11 +76,11 @@ Automobiles from inventory are polled every 60 seconds which creates an Autmobil
 
 **React Front End for Sales**
 
-http://localhost:3000/salesrecords - Lists out all sales records
-http://localhost:3000/salesrecord/new - Form to create a new salerecord
-http://localhost:3000/salesrecords/history - List all salesrecords by selected salesperson
-http://localhost:3000/customers/new - Form to create a new customer
-http://localhost:3000/salesteam/new - Form to create a new salesperson
+ - http://localhost:3000/salesrecords - Lists out all sales records
+ - http://localhost:3000/salesrecord/new - Form to create a new salerecord
+ - http://localhost:3000/salesrecords/history - List all salesrecords by selected salesperson
+ - http://localhost:3000/customers/new - Form to create a new customer
+ - http://localhost:3000/salesteam/new - Form to create a new salesperson
 
 
 
