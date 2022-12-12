@@ -132,5 +132,5 @@ def api_AutomovileVO_list(request):
         autos = AutomobileVO.objects.all()
         return JsonResponse(
             {"autos": autos},
-            AutomobileVOEncoder, safe=False
+            AutomobileVOEncoder, safe=True
         )
