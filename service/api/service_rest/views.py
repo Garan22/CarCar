@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import JsonResponse
 from django.views.decorators.http import require_http_methods
 import json
-from .encoders import (AutoTechnicianEncoder, ServiceAppointmentEncoder, AutomobileVO)
+from .encoders import (AutoTechnicianEncoder, ServiceAppointmentEncoder, AutomobileVOEncoder)
 from .models import AutoTechnician, ServiceAppointment, AutomobileVO
 
 @require_http_methods(["GET","POST"])
@@ -82,18 +82,18 @@ def api_ServiceAppointments_list(request):
     if request.method == "GET":
         service_appointments = ServiceAppointment.objects.all()
         return JsonResponse(
-            {"service_appointments": service_appointments }, encoder=ServiceAppointmentEncoder,
+            {"service_appointments": service_appointments}, encoder=ServiceAppointmentEncoder,
             safe=False,
         )
     else:
+        content = json.loads(request.body)
         try:
-            content = json.loads(request.body)
             service_appointments = ServiceAppointment.objects.create(**content)
             return JsonResponse(
                 service_appointments, encoder=ServiceAppointmentEncoder,
                 safe=False
             )
-        except:
+        except ServiceAppointment.DoesNotExist:
             response = JsonResponse (
                 { "message": "Could not create this Service appointment"}
                 )
@@ -125,3 +125,12 @@ def api_ServiceAppointment_detail(request, pk):
             return JsonResponse({
                 "message": "Service appointment has been deleted"
             })
+
+@require_http_methods(["GET"])
+def api_AutomovileVO_list(request):
+    if request.method == "GET":
+        autos = AutomobileVO.objects.all()
+        return JsonResponse(
+            {"autos": autos},
+            AutomobileVOEncoder, safe=True
+        )

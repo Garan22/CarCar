@@ -10,20 +10,13 @@ class AutoTechnician(models.Model):
         return self.name
 
 
-class Status(models.Model):
-    cancel = models.BooleanField(default=False)
-    finish = models.BooleanField(default=False)
-
-
 class ServiceAppointment(models.Model):
     vin = models.CharField(max_length=17, unique=True)
     customer_name = models.CharField(max_length=20)
-    date = models.DateField()
-    time = models.TimeField()
+    date = models.CharField(max_length=10)
+    time = models.CharField(max_length=10)
     service_reason = models.CharField(max_length=100)
-    status = models.ForeignKey(
-        Status, related_name="ServiceAppointment", on_delete=models.CASCADE,
-    )
+    dealership_purchase = models.BooleanField(default=False)
 
     technician = models.ForeignKey(
         AutoTechnician, related_name="ServiceAppointment", on_delete=models.CASCADE
@@ -38,6 +31,7 @@ class AutomobileVO(models.Model):
     color = models.CharField(max_length=50)
     year = models.PositiveSmallIntegerField()
     vin = models.CharField(max_length=17, unique=True)
+
 
     def __str__(self):
         return "Auto Vin -" + self.vin
