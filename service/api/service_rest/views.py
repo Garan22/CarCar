@@ -87,7 +87,15 @@ def api_ServiceAppointments_list(request):
         )
     else:
         content = json.loads(request.body)
+
         try:
+            service_technician = {"technician": AutoTechnician.objects.get(id=content["technician"])}
+            content.update(service_technician)
+
+
+            inventory = AutomobileVO.objects.all().values_list('vin', flat=True)
+            if content["vin"] in inventory:
+                content["dealership_purchase"] = True
             service_appointments = ServiceAppointment.objects.create(**content)
             return JsonResponse(
                 service_appointments, encoder=ServiceAppointmentEncoder,
@@ -119,7 +127,7 @@ def api_ServiceAppointment_detail(request, pk):
             service_appointment = ServiceAppointment.objects.get(id=pk)
             service_appointment.delete()
             return JsonResponse(
-                service_appointment, encoder=ServiceAppointmentEncoder, safe=True
+                service_appointment, encoder=ServiceAppointmentEncoder, safe=False
             )
         except ServiceAppointment.DoesNotExist:
             return JsonResponse({
@@ -132,5 +140,5 @@ def api_AutomovileVO_list(request):
         autos = AutomobileVO.objects.all()
         return JsonResponse(
             {"autos": autos},
-            AutomobileVOEncoder, safe=True
+            AutomobileVOEncoder, safe=False
         )

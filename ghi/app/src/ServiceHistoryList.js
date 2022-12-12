@@ -4,7 +4,7 @@ import {useEffect, useState} from "react"
 import './index.css'
 
 
-function ServiceAppointmentList() {
+function ServiceHistoryList() {
     const [service_appointments, setService_Appointments] = useState([]);
 
     useEffect(() => {
