@@ -58,7 +58,6 @@ const SearchBar = () => {
                 <th>Appointment time</th>
                 <th>Service Reason</th>
                 <th>Technician</th>
-                {/* <th>VIP treatment </th> */}
               </tr>
             </thead>
             <tbody>

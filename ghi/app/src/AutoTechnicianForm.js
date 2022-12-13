@@ -1,7 +1,6 @@
 import React, { useState} from 'react'
 import './index.css'
 
-// const AutoTechnicianForm = () => {
 function AutoTechnicianForm() {
 
 const [values, setValues] = useState({
@@ -30,7 +29,6 @@ const handleSubmit = (event) => {
         'name': values.name,
         'employee_number': values.employee_number,
     }
-    // console.log(newAutoTechnician)
 
     const AutoTechnicianUrl = 'http://localhost:8080/api/autotechnician/'
     const fetchConfig = {
