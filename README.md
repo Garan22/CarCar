@@ -179,4 +179,4 @@ Note the boolean field of vehicleSold will update itself once a sale is posted
 
 # Project Diagram
 
-![Diagram](./imagefolder/Diagram.png)
+![Diagram](./imagefolder/diagram.png)
