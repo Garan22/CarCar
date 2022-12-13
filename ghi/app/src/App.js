@@ -34,8 +34,8 @@ function App() {
           <Route path="/customers/new" element={<CustomerForm/>}></Route>
           <Route path= "/salesteam/new" element={<SalespersonForm/>}></Route>
           <Route path="/autotechnician/new" element={<AutoTechnicianForm/>}></Route>
-          <Route path="serviceappointment/new" element={<ServiceAppointmentForm/>}></Route>
-          <Route path="serviceappointments/" element={<ServiceAppointmentList/>}></Route>
+          <Route path="/serviceappointment/new" element={<ServiceAppointmentForm/>}></Route>
+          <Route path="/serviceappointments/" element={<ServiceAppointmentList/>}></Route>
           <Route path="/salesrecord/new" element={<SalesRecordForm/>}></Route>
           <Route path="/salesrecords" element={<SalesRecordList/>}></Route>
           <Route path="/salesrecords/history" element={<SalesRecordHistoryList/>}></Route>

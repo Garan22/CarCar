@@ -11,7 +11,7 @@ class AutoTechnician(models.Model):
 
 
 class ServiceAppointment(models.Model):
-    vin = models.CharField(max_length=17, unique=True)
+    vin = models.CharField(max_length=17)
     customer_name = models.CharField(max_length=20)
     date = models.CharField(max_length=10)
     time = models.CharField(max_length=10)

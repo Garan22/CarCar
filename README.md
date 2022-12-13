@@ -6,7 +6,7 @@
 Team:
 
 * Khaled Azimi - Sales
-* Person 2 - Which microservice?
+* Gabriel Aranda - Services
 
 # **Steps to Run Project**
 
@@ -31,8 +31,28 @@ Team:
 
 ## Service microservice
 
-Explain your models and integration with the inventory
-microservice, here.
+```
+Auto technician:
+  - "name", auto technician name, input received through form
+  - "employee_number", created through form input, references unique employee number.
+
+Service Appointment:
+    - "vin", Vehicle vin.
+    - "customer_name", vehicle ownwer name.
+    - "date", scheduled service appointment date.
+    - "time", scheduled service appointment time.
+    - "service_reason", reason for service appointment.
+    - "dealership_purchase", determines whether the vehicle vin for the service appointment matches inventory vehicle vin, for access to VIP treatment.
+    - "technician", the selected technician for the service appointment
+
+AutomobileVO:
+    - "Import_href", received from inventory database using poller.
+    - "color", color description of the automobile.
+    - "year", automobile year.
+    - "vin", of the vehicle in inventory.
+
+
+```
 
 ## Sales microservice
 ```
@@ -79,6 +99,12 @@ Automobiles from inventory are polled every 60 seconds which creates an Autmobil
  - http://localhost:3000/customers/new - Form to create a new customer
  - http://localhost:3000/salesteam/new - Form to create a new salesperson
 
+**React Front End for Service**
+
+- http://localhost:3000/autotechnician/new - Form to create a new Auto technician
+- http://localhost:3000/serviceappointment/new - Form to create a new Service appointment
+- http://localhost:3000/serviceappointments/ - List all Service appointments
+-
 
 
 
@@ -110,6 +136,14 @@ Automobiles from inventory are polled every 60 seconds which creates an Autmobil
 | Sales | DELETE | 8090 | Delete a specific salesperson| http://localhost:8090/api/salesteam/{salesperson.id}/
 | Sales | POST | 8090 | Creates a new sale | http://localhost:8090/api/salesteam/
 | Sales | POST | 8090 | Gets a list of all sales | http://localhost:8090/api/salesteam/
+| Service | GET | 8080 | Gets a list of all Auto technicians | http://localhost:8080/api/autotechnician/
+| Service | GET | 8080 | Gets details of a specific Auto technician | http://localhost:8080/api/autotechnician/{technician.id}/
+| Service| POST | 8080 | Creates a new Auto technician  | http://localhost:8080/api/autotechnician/
+| Service| GET | 8080 | List Service appointments  | http://localhost:8080/api/serviceappointments/
+| Service| GET | 8080 | Gets details of a specific Service appointment  | http://localhost:8080/api/serviceappointments/service_appointments.id}/
+| Service| POST | 8080 | Creates a Service appointment  | http://localhost:8080/api/serviceappointments/
+
+
 
 
 
@@ -175,8 +209,26 @@ Record a new sale
 Note the boolean field of vehicleSold will update itself once a sale is posted
 ```
 
-
-
+Create a new Auto technician
+```
+{
+			"name": "Josh",
+			"employee_number": "1"
+}
+```
+Create a Service Appointment
+```
+{
+	"vin": "adjf3we43j4444444",
+	"customer_name": "Gel",
+	"date": "2012-03-11",
+	"time": "12:30:03",
+	"service_reason": "Needs new brakes",
+	"technician": 1,
+	"dealership_purchase": false
+}
+Note: If vin matches vin in automobile inventory,
+```
 # Project Diagram
 
 ![diagram](./imagefolder/diagram.png)

@@ -28,6 +28,7 @@ function ServiceAppointmentList() {
         fetch(serviceUrl, fetchConfig)
             .then(response => response.json())
             .then(data => {
+              window.location.reload();
                 if (data.deleted) {
                     const currentService = [...service_appointments]
                     setService_Appointments(currentService.filter(service => service.id !== pk))
@@ -35,6 +36,8 @@ function ServiceAppointmentList() {
             })
             .catch(e => console.log('error: ', e));
     }
+
+
 
 
     return (
@@ -65,8 +68,7 @@ function ServiceAppointmentList() {
                     <td>{service.service_reason}</td>
                     <td>{service.technician.name}</td>
                     <td><button className="btn btn-primary" id="button1" onClick={() => OnDeleteServiceAppointmentClick(service)}>Canceled</button><button id="button2" className="btn btn-primary" onClick={() => OnDeleteServiceAppointmentClick(service)}>Finished</button></td>
-                    <td></td>
-                    <td>{service.dealership_purchase}</td>
+                    <td>{service.dealership_purchase && (<div>Yes</div>)}</td>
                   </tr>
                 );
               })}
