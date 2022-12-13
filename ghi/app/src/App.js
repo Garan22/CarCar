@@ -15,7 +15,7 @@ import ServiceAppointmentList from './ServiceAppointmentList';
 import SalesRecordForm from './SalesRecordForm';
 import SalesRecordList from './SalesRecordsList';
 import SalesRecordHistoryList from './SalesRecordHistoryList';
-// import ServiceHistoryList from './ServiceHistoryList';
+import ServiceHistoryList from './ServiceHistoryList';
 
 function App() {
 
@@ -39,7 +39,7 @@ function App() {
           <Route path="/salesrecord/new" element={<SalesRecordForm/>}></Route>
           <Route path="/salesrecords" element={<SalesRecordList/>}></Route>
           <Route path="/salesrecords/history" element={<SalesRecordHistoryList/>}></Route>
-          {/* <Route path="servicehistory/" element={<ServiceHistoryList/>}></Route> */}
+          <Route path="servicehistory/" element={<ServiceHistoryList/>}></Route>
         </Routes>
       </div>
     </BrowserRouter>
